@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#070612">
+<title>BETIXO.COM - تسجيل الدخول</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#000;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Tahoma,Arial,sans-serif;overflow-x:hidden;min-height:100vh}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit;border:0;outline:0}
+img{display:block;max-width:100%}
+:root{--b:#070612;--e:#0b0a18;--d:#0d0c19;--acc:#7c3aed;--acc2:#2563eb;--ok:#24e4a2;--err:#ff5470;--gold:#ffd76a}
+
+.app{width:100%;min-height:100vh;background:linear-gradient(180deg,#070612 0%,#0b0a18 100%);padding:0 0 40px}
+
+/* === Top URL bar showing the referral link === */
+.urlbar{
+  background:linear-gradient(90deg,#0d0c19,#171327 50%,#0d0c19);
+  border-bottom:1px solid #2a1b52;
+  display:flex;align-items:center;gap:8px;
+  padding:8px 12px;
+  font-size:13px;color:#cbd5e1;direction:ltr;
+  position:sticky;top:0;z-index:10;
+}
+.urlbar .lock{
+  width:22px;height:22px;border-radius:50%;
+  background:#1fc97833;color:#1fc978;
+  display:grid;place-items:center;font-size:12px;flex:none;
+}
+.urlbar .u{
+  flex:1;background:#05050d;border:1px solid #243040;border-radius:8px;
+  padding:6px 10px;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:#e2e8f0;
+}
+.urlbar .u .hl{color:#ffd76a;font-weight:700}
+.urlbar .copy{
+  background:#1b1b2a;border:1px solid #2a2a39;color:#ddd;
+  padding:6px 10px;border-radius:8px;font-size:12px;cursor:pointer;flex:none;
+}
+.urlbar .copy:active{transform:scale(.96)}
+
+/* === Brand === */
+.brand{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:22px 12px 8px;
+}
+.brand img{width:54px;height:54px;border-radius:14px;object-fit:cover;box-shadow:0 0 18px #4f46e577}
+.brand b{font-size:26px;letter-spacing:1px;background:linear-gradient(90deg,#7c3aed,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{text-align:center;color:#94a3b8;font-size:13px;margin:0 0 18px}
+
+/* === Tabs === */
+.tabs{display:flex;margin:0 14px 14px;background:#0d0c19;border:2px solid #233041;border-radius:14px;overflow:hidden}
+.tabs button{
+  flex:1;height:44px;background:transparent;color:#94a3b8;font-weight:700;font-size:15px;cursor:pointer;transition:.2s;
+}
+.tabs button.on{background:linear-gradient(90deg,#7c3aed,#2563eb);color:#fff}
+
+/* === Form card === */
+.card{
+  margin:0 14px;background:#0b0a18;border:2px solid #1f1f33;
+  border-radius:18px;padding:18px;
+}
+.field{margin:0 0 12px}
+.field label{display:block;font-size:13px;color:#cbd5e1;margin:0 0 6px;font-weight:600}
+.field input{
+  width:100%;height:48px;background:#070612;border:2px solid #243040;
+  border-radius:12px;padding:0 14px;color:#fff;font-size:15px;
+  transition:.2s;
+}
+.field input:focus{border-color:#7c3aed;box-shadow:0 0 0 3px #7c3aed33}
+.field.ref input{background:#0c0a1f;border-color:#3f2e74;color:#ffd76a;font-weight:700;letter-spacing:2px;text-align:center;direction:ltr}
+.field.ref input[readonly]{background:#0c0a1f;cursor:not-allowed;opacity:.95}
+.refnote{font-size:12px;color:#ffd76a;margin-top:6px;display:flex;align-items:center;gap:6px}
+.refnote.bad{color:#ff7b72}
+.refnote.ok{color:#1fc978}
+.refnote .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+
+.submit{
+  width:100%;height:50px;border-radius:14px;
+  background:linear-gradient(90deg,#7c3aed,#2563eb);
+  color:#fff;font-weight:800;font-size:16px;cursor:pointer;margin-top:6px;
+  transition:.2s;
+}
+.submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px #7c3aed55}
+.submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+
+.err{
+  background:#3a0d1a;border:1px solid #ff547055;color:#ff7b72;
+  border-radius:10px;padding:10px 12px;font-size:13px;margin:0 0 12px;
+  display:none;
+}
+.err.show{display:block}
+.ok{
+  background:#0d3a25;border:1px solid #1fc97855;color:#1fc978;
+  border-radius:10px;padding:10px 12px;font-size:13px;margin:0 0 12px;
+  display:none;
+}
+.ok.show{display:block}
+
+.foot{text-align:center;color:#64748b;font-size:12px;margin:18px 14px 0;line-height:1.7}
+.foot a{color:#a78bfa}
+
+/* loader */
+.ld{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:99}
+.ld.on{display:flex}
+.ld .sp{width:46px;height:46px;border:4px solid #233041;border-top-color:#7c3aed;border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* Referrer preview card */
+.refcard{
+  margin:0 0 12px;background:linear-gradient(135deg,#0f1f1a,#1b3d2f);
+  border:1px solid #1fc97844;border-radius:12px;padding:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.refcard img{width:42px;height:42px;border-radius:10px;background:#0a0a14}
+.refcard .ri{flex:1;min-width:0}
+.refcard .ri b{display:block;color:#ffd76a;font-size:14px}
+.refcard .ri span{display:block;color:#bbb;font-size:12px}
+
+/* hide one form at a time */
+.frm{display:none}
+.frm.on{display:block}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ====== TOP URL BAR (always visible) ====== -->
+  <div class="urlbar" id="urlbar">
+    <div class="lock">🔒</div>
+    <div class="u" id="urlText">https://betixo.vercel.app/#index=ref=<span class="hl" id="urlCode">------</span></div>
+    <button class="copy" id="urlCopy">نسخ</button>
+  </div>
+
+  <div class="brand">
+    <img src="https://i.ibb.co/0pZYsvP4/44.png" alt="BETIXO">
+    <b>BETIXO</b>
+  </div>
+  <div class="subtitle">منصة الاستثمار والربح الآمن</div>
+
+  <div class="tabs">
+    <button id="tabLogin" class="on">تسجيل الدخول</button>
+    <button id="tabSignup">إنشاء حساب</button>
+  </div>
+
+  <div class="card">
+
+    <div class="err" id="errBox"></div>
+    <div class="ok"  id="okBox"></div>
+
+    <!-- ===== LOGIN FORM ===== -->
+    <form class="frm on" id="loginForm" autocomplete="on" novalidate>
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input type="password" id="loginPass" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="submit" id="loginBtn">تسجيل الدخول</button>
+    </form>
+
+    <!-- ===== SIGNUP FORM ===== -->
+    <form class="frm" id="signupForm" autocomplete="on" novalidate>
+      <div id="refPreview"></div>
+
+      <div class="field ref">
+        <label>كود الدعوة (مطلوب)</label>
+        <input type="text" id="signRef" placeholder="------" maxlength="12" inputmode="numeric">
+        <div class="refnote" id="refNote"><div class="dot"></div><span>أدخل كود دعوة صالح للمتابعة</span></div>
+      </div>
+
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="signEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label>كلمة المرور (6 أحرف على الأقل)</label>
+        <input type="password" id="signPass" placeholder="••••••••" minlength="6" required>
+      </div>
+      <div class="field">
+        <label>تأكيد كلمة المرور</label>
+        <input type="password" id="signPass2" placeholder="••••••••" minlength="6" required>
+      </div>
+      <button type="submit" class="submit" id="signBtn" disabled>إنشاء الحساب</button>
+    </form>
+
+  </div>
+
+  <div class="foot">
+    بإنشاء حساب فأنت توافق على شروط الاستخدام وسياسة الخصوصية.<br>
+    © BETIXO.COM
+  </div>
+
+</div>
+
+<div class="ld" id="ld"><div class="sp"></div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,collection,query,where,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyBvzfJOOjRFZnTgTUrwEZQPr8Ba7zKKlNg",authDomain:"hhhxh-5ebe4.firebaseapp.com",projectId:"hhhxh-5ebe4",storageBucket:"hhhxh-5ebe4.firebasestorage.app",messagingSenderId:"79243000696",appId:"1:79243000696:web:ee0fb2d2ccce791954e68d",measurementId:"G-08BR6LN6PT"};
+const fbApp=initializeApp(firebaseConfig), fbAuth=getAuth(fbApp), fbDb=getFirestore(fbApp);
+
+const $=i=>document.getElementById(i);
+const ld=$("ld"); function L(v){ld.classList.toggle("on",!!v)}
+const errBox=$("errBox"), okBox=$("okBox");
+function showErr(m){errBox.textContent=m;errBox.classList.add("show");okBox.classList.remove("show");setTimeout(()=>errBox.classList.remove("show"),5000)}
+function showOk(m){okBox.textContent=m;okBox.classList.add("show");errBox.classList.remove("show")}
+
+/* === Parse referral code from URL (supports #ref=XXX, #index=ref=XXX, ?ref=XXX) === */
+function parseRefCode(){
+  try{
+    const h = location.hash || "";
+    const s = location.search || "";
+    let m = h.match(/ref=([A-Za-z0-9]+)/i) || s.match(/[?&]ref=([A-Za-z0-9]+)/i);
+    if(m && m[1]) return m[1];
+    // also accept stored value from index.html
+    const c = sessionStorage.getItem("pendingRefCode");
+    if(c) return c;
+  }catch(e){}
+  return "";
+}
+
+/* === Update the top URL bar to reflect the active ref code === */
+function setUrlBar(code){
+  const c = code || "------";
+  $("urlCode").textContent = c;
+  // also reflect in browser hash so url is shareable
+  try{
+    const newHash = "#index=ref="+c;
+    if(c && c!=="------" && location.hash !== newHash){
+      history.replaceState(null,"",location.pathname+location.search+newHash);
+    }
+  }catch(e){}
+}
+
+/* === Tab switching === */
+const tabLogin=$("tabLogin"), tabSignup=$("tabSignup");
+const loginForm=$("loginForm"), signupForm=$("signupForm");
+function go(tab){
+  errBox.classList.remove("show"); okBox.classList.remove("show");
+  if(tab==="login"){
+    tabLogin.classList.add("on"); tabSignup.classList.remove("on");
+    loginForm.classList.add("on"); signupForm.classList.remove("on");
+  } else {
+    tabLogin.classList.remove("on"); tabSignup.classList.add("on");
+    loginForm.classList.remove("on"); signupForm.classList.add("on");
+    // auto-fill the ref input from URL on opening signup
+    autoFillRef();
+  }
+}
+tabLogin.addEventListener("click",()=>go("login"));
+tabSignup.addEventListener("click",()=>go("signup"));
+
+/* === Auto-fill the referral code into the signup field & validate === */
+let VERIFIED_OWNER = null; // {uid, data}
+const signRef = $("signRef"), refNote = $("refNote"), signBtn = $("signBtn"), refPreview = $("refPreview");
+
+function setNote(state, text){
+  refNote.className = "refnote "+(state||"");
+  refNote.innerHTML = '<div class="dot"></div><span>'+text+'</span>';
+}
+
+async function validateRefCode(code){
+  refPreview.innerHTML = "";
+  VERIFIED_OWNER = null;
+  signBtn.disabled = true;
+  if(!code || code.length<4){
+    setNote("", "أدخل كود دعوة صالح للمتابعة");
+    return;
+  }
+  setNote("", "جاري التحقق من الكود...");
+  try{
+    const q1 = query(collection(fbDb,"users"), where("inviteCode","==", String(code)));
+    const snap = await getDocs(q1);
+    if(snap.empty){
+      setNote("bad", "❌ كود الدعوة غير صحيح. لا يمكن إنشاء الحساب.");
+      signBtn.disabled = true;
+      return;
+    }
+    const d = snap.docs[0];
+    VERIFIED_OWNER = { uid: d.id, data: d.data() };
+    const r = VERIFIED_OWNER.data;
+    const dt = r.createdAt && r.createdAt.toDate ? r.createdAt.toDate().toLocaleDateString("ar-EG") : "-";
+    refPreview.innerHTML = '<div class="refcard">'+
+      '<img src="'+(r.avatar||"https://cdn-icons-png.flaticon.com/128/8004/8004218.png")+'">'+
+      '<div class="ri"><b>'+(r.name||"محيلك")+'</b>'+
+      '<span>ID: '+(r.inviteCode||"")+'</span>'+
+      '<span>تاريخ الإنشاء: '+dt+'</span></div></div>';
+    setNote("ok", "✓ تم التحقق من كود الدعوة بنجاح");
+    signBtn.disabled = false;
+  }catch(e){
+    console.warn(e);
+    setNote("bad", "تعذر التحقق من الكود حالياً، حاول مجدداً");
+    signBtn.disabled = true;
+  }
+}
+
+let refDebounce=null;
+signRef.addEventListener("input", e=>{
+  const v = (e.target.value||"").replace(/\s+/g,"");
+  e.target.value = v;
+  setUrlBar(v);
+  clearTimeout(refDebounce);
+  refDebounce = setTimeout(()=>validateRefCode(v), 350);
+});
+
+function autoFillRef(){
+  const code = parseRefCode();
+  if(code){
+    signRef.value = code;
+    setUrlBar(code);
+    validateRefCode(code);
+  } else {
+    setUrlBar("");
+  }
+}
+
+/* === Copy URL button === */
+$("urlCopy").addEventListener("click", ()=>{
+  const code = (signRef.value || parseRefCode() || "").trim();
+  const url = "https://betixo.vercel.app/#index=ref="+(code||"------");
+  if(navigator.clipboard) navigator.clipboard.writeText(url);
+  const b = $("urlCopy"); b.textContent = "تم النسخ";
+  setTimeout(()=>b.textContent="نسخ",1200);
+});
+
+/* === Generate a unique 6-digit invite code === */
+async function generateUniqueInviteCode(){
+  for(let i=0;i<8;i++){
+    const cand = String(Math.floor(100000+Math.random()*900000));
+    const q1 = query(collection(fbDb,"users"), where("inviteCode","==", cand));
+    const r = await getDocs(q1);
+    if(r.empty) return cand;
+  }
+  return String(Date.now()).slice(-6);
+}
+
+/* === LOGIN === */
+loginForm.addEventListener("submit", async e=>{
+  e.preventDefault();
+  const email = ($("loginEmail").value||"").trim();
+  const pass  = ($("loginPass").value||"");
+  if(!email || !pass){ showErr("يرجى إدخال البريد وكلمة المرور"); return; }
+  L(1);
+  try{
+    await signInWithEmailAndPassword(fbAuth, email, pass);
+    showOk("تم تسجيل الدخول، جاري التحويل...");
+    setTimeout(()=>{ location.href = "index.html"; }, 600);
+  }catch(err){
+    L(0);
+    let m = "فشل تسجيل الدخول";
+    const code = err && err.code || "";
+    if(code.includes("invalid-credential")||code.includes("wrong-password")||code.includes("user-not-found")) m="البريد أو كلمة المرور غير صحيحة";
+    else if(code.includes("invalid-email")) m="صيغة البريد غير صحيحة";
+    else if(code.includes("too-many-requests")) m="محاولات كثيرة، انتظر قليلاً";
+    showErr(m);
+  }
+});
+
+/* === SIGNUP === */
+signupForm.addEventListener("submit", async e=>{
+  e.preventDefault();
+  errBox.classList.remove("show"); okBox.classList.remove("show");
+
+  const refCode = (signRef.value||"").trim();
+  const email   = ($("signEmail").value||"").trim();
+  const pass    = ($("signPass").value||"");
+  const pass2   = ($("signPass2").value||"");
+
+  if(!refCode){ showErr("كود الدعوة مطلوب"); return; }
+  if(!email){ showErr("البريد الإلكتروني مطلوب"); return; }
+  if(pass.length < 6){ showErr("كلمة المرور يجب أن تكون 6 أحرف على الأقل"); return; }
+  if(pass !== pass2){ showErr("كلمتا المرور غير متطابقتين"); return; }
+
+  L(1);
+  try{
+    // === STRICT CHECK: re-verify the invite code right before creating the account ===
+    let ownerUid = VERIFIED_OWNER && VERIFIED_OWNER.uid;
+    if(!ownerUid){
+      const q1 = query(collection(fbDb,"users"), where("inviteCode","==", String(refCode)));
+      const snap = await getDocs(q1);
+      if(snap.empty){
+        L(0);
+        showErr("كود الدعوة غير صحيح. لا يمكن إنشاء الحساب بدون كود صالح.");
+        signBtn.disabled = true;
+        setNote("bad","❌ كود الدعوة غير صحيح");
+        return;
+      }
+      ownerUid = snap.docs[0].id;
+      VERIFIED_OWNER = { uid: ownerUid, data: snap.docs[0].data() };
+    }
+
+    // === Pre-allocate a unique invite code for the new user ===
+    const newInviteCode = await generateUniqueInviteCode();
+
+    // === Now create the Firebase Auth account ===
+    const cred = await createUserWithEmailAndPassword(fbAuth, email, pass);
+    const u = cred.user;
+    try{ await updateProfile(u,{displayName: (email.split("@")[0]||"")}); }catch(e){}
+
+    // === Immediately create the user doc WITH the referrer link ===
+    // This MUST happen before the user is redirected to index.html so that
+    // ensureUserDoc() will see the doc already exists and won't run.
+    await setDoc(doc(fbDb,"users", u.uid), {
+      uid: u.uid,
+      name: (email.split("@")[0]||""),
+      email: email,
+      balance: 0,
+      vip: 0,
+      verified: "none",
+      inviteCode: newInviteCode,
+      referredBy: ownerUid,                 // ← LINK TO REFERRER
+      referredByCode: String(refCode),      // human-readable copy of the code
+      avatar: "https://cdn-icons-png.flaticon.com/128/8004/8004218.png",
+      totalDeposit: 0,
+      totalWithdraw: 0,
+      createdAt: serverTimestamp()
+    });
+
+    // also store hints for index.html (defensive — already created above)
+    try{
+      sessionStorage.setItem("verifiedRefCode", String(refCode));
+      sessionStorage.setItem("verifiedRefOwnerUid", ownerUid);
+    }catch(e){}
+
+    showOk("تم إنشاء الحساب بنجاح! جاري التحويل...");
+    setTimeout(()=>{ location.href = "index.html"; }, 700);
+  }catch(err){
+    L(0);
+    console.warn(err);
+    let m = "فشل إنشاء الحساب";
+    const code = err && err.code || "";
+    if(code.includes("email-already-in-use")) m="هذا البريد مسجّل مسبقاً، يمكنك تسجيل الدخول";
+    else if(code.includes("invalid-email")) m="صيغة البريد غير صحيحة";
+    else if(code.includes("weak-password")) m="كلمة المرور ضعيفة (6 أحرف على الأقل)";
+    else if(code.includes("network")) m="مشكلة في الاتصال، حاول مجدداً";
+    showErr(m);
+  }
+});
+
+/* === If already logged in, go straight to index === */
+onAuthStateChanged(fbAuth, u=>{
+  if(u){ location.href = "index.html"; }
+});
+
+/* === On load: auto-fill ref + open signup tab if a code is present in URL === */
+(function init(){
+  const code = parseRefCode();
+  if(code){
+    // open signup automatically so the user lands on the "use the code" flow
+    go("signup");
+  } else {
+    setUrlBar("");
+  }
+})();
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
