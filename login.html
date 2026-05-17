@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11081b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>GIPOX Auth</title>
+<style>
+:root{--bg:#090411;--bg2:#12081d;--card:rgba(22,12,37,.86);--line:rgba(170,100,255,.22);--txt:#fff;--muted:#b9aed4;--blue:#34bfff;--vio:#8f48ff;--pink:#d84fff;--ok:#61ffba;--err:#ff7caa;--shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 12px 40px rgba(0,0,0,.45),0 0 35px rgba(144,72,255,.18)}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--txt);background:
+radial-gradient(900px 500px at 50% -10%,rgba(89,0,255,.18),transparent 50%),
+radial-gradient(500px 260px at 15% 15%,rgba(0,195,255,.10),transparent 50%),
+radial-gradient(600px 420px at 100% 100%,rgba(214,0,255,.10),transparent 40%),
+linear-gradient(180deg,var(--bg),var(--bg2));display:grid;place-items:center;padding:18px}
+body:before,body:after{content:"";position:fixed;inset:auto;width:260px;height:260px;filter:blur(60px);pointer-events:none;opacity:.35}
+body:before{top:-40px;left:-30px;background:#256dff}
+body:after{right:-40px;bottom:-40px;background:#9e39ff}
+.wrap{width:min(100%,430px)}
+.card{position:relative;background:linear-gradient(180deg,rgba(26,14,45,.92),rgba(14,8,24,.92));border:1px solid var(--line);border-radius:34px;box-shadow:var(--shadow);padding:26px 18px 20px;overflow:hidden;backdrop-filter:blur(14px)}
+.card:before{content:"";position:absolute;inset:-2px auto auto 50%;transform:translateX(-50%);width:72%;height:180px;background:radial-gradient(circle,rgba(130,72,255,.20),transparent 60%);filter:blur(18px)}
+.brand{display:grid;place-items:center;gap:8px;margin:2px 0 16px;position:relative;z-index:1}
+.logoBox{width:98px;height:98px;border-radius:28px;background:linear-gradient(145deg,rgba(45,197,255,.95),rgba(125,75,255,.95) 60%,rgba(225,82,255,.95));display:grid;place-items:center;box-shadow:0 14px 36px rgba(106,72,255,.42),0 0 24px rgba(78,204,255,.30),inset 0 0 0 1px rgba(255,255,255,.14)}
+.logoBox img{width:78%;height:78%;object-fit:contain;filter:drop-shadow(0 0 12px rgba(255,255,255,.08))}
+h1{margin:0;font-size:20px;line-height:1;font-weight:900;letter-spacing:.8px;background:linear-gradient(90deg,#55d3ff,#5fa7ff 35%,#cd58ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:0;color:#d8cfff;font-size:13px;font-weight:700;opacity:.88}
+.tabs{display:flex;gap:6px;background:#1a1227;border:1px solid rgba(255,255,255,.04);border-radius:22px;padding:6px;margin:10px 0 16px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
+.tabs button{flex:1;border:0;border-radius:17px;padding:13px 10px;font-weight:900;font-size:15px;cursor:pointer;color:#d8cfff;background:transparent;transition:.25s}
+.tabs button.active{color:#fff;background:linear-gradient(90deg,var(--blue),var(--vio) 60%,var(--pink));box-shadow:0 0 20px rgba(168,74,255,.32)}
+.form{display:none;animation:up .25s ease}.form.active{display:block}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.field{position:relative;margin:12px 0}
+.inp{width:100%;height:64px;border-radius:20px;border:1px solid rgba(175,110,255,.22);outline:0;background:rgba(22,13,35,.92);color:#fff;padding:0 116px 0 54px;font-size:17px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);transition:.25s}
+.inp::placeholder{color:#a99cc8;font-weight:700}
+.inp:focus{border-color:#b15cff;box-shadow:0 0 0 2px rgba(186,93,255,.16),0 0 24px rgba(179,86,255,.18),inset 0 0 0 1px rgba(255,255,255,.04)}
+.i{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:22px;height:22px;display:grid;place-items:center;color:#c5b8e8;opacity:.95}
+.i svg{width:22px;height:22px;stroke:currentColor}
+.endBtn{position:absolute;right:12px;top:50%;transform:translateY(-50%);height:40px;padding:0 16px;border-radius:14px;border:1px solid rgba(195,117,255,.35);background:rgba(111,51,171,.16);color:#f2dbff;font-weight:900;cursor:pointer}
+.endTxt{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:0;color:#dbc0ff;font-weight:900;cursor:pointer}
+.note{margin:6px 4px 0;color:#cbbfe3;font-size:13px;font-weight:700;min-height:18px}
+.note.ok{color:var(--ok)}.note.err{color:var(--err)}
+.mainBtn{width:100%;height:64px;border:0;border-radius:22px;margin-top:16px;background:linear-gradient(90deg,var(--blue),var(--vio) 58%,var(--pink));color:#fff;font-size:18px;font-weight:1000;cursor:pointer;box-shadow:0 12px 32px rgba(126,72,255,.35),0 0 18px rgba(64,197,255,.16)}
+.mainBtn:disabled,.endBtn:disabled,.endTxt:disabled{opacity:.65;cursor:not-allowed}
+.alt{margin:16px 0 4px;text-align:center;color:#cdbfe5;font-weight:700;font-size:15px}
+.alt a{color:#e8c2ff;text-decoration:none;font-weight:900}
+.small{font-size:13px}
+#boot{position:fixed;inset:0;background:linear-gradient(180deg,#0a0410,#13081d);display:grid;place-items:center;z-index:20;transition:.25s}
+#boot.hide{opacity:0;visibility:hidden}
+.spin{width:52px;height:52px;border-radius:50%;border:4px solid rgba(255,255,255,.08);border-top-color:#b85cff;animation:rot .8s linear infinite;box-shadow:0 0 30px rgba(144,72,255,.2)}
+@keyframes rot{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(20px);background:#171022;border:1px solid rgba(191,110,255,.26);color:#fff;padding:12px 16px;border-radius:16px;font-weight:800;opacity:0;pointer-events:none;transition:.25s;z-index:30;box-shadow:var(--shadow)}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast.ok{border-color:rgba(97,255,186,.35);box-shadow:0 0 24px rgba(97,255,186,.12)}
+.toast.err{border-color:rgba(255,124,170,.28);box-shadow:0 0 24px rgba(255,124,170,.10)}
+</style>
+</head>
+<body>
+<div id="boot"><div class="spin"></div></div>
+<div class="wrap">
+  <div class="card">
+    <div class="brand">
+      <div class="logoBox"><img src="https://api.tradeexchangecryptolimited.com/upload/img/6a02e74db72c.webp" alt="GIPOX"></div>
+      <h1>GIPOX</h1>
+      <p class="sub">Pro Trading Platform</p>
+    </div>
+
+    <div class="tabs">
+      <button id="tabIn">Sign In</button>
+      <button id="tabUp" class="active">Create Account</button>
+    </div>
+
+    <form id="signinForm" class="form">
+      <div class="field">
+        <span class="i"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7l8 6 8-6"/><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="2"/></svg></span>
+        <input id="inEmail" class="inp" type="email" placeholder="Email address" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <span class="i"><svg fill="none" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2" stroke-width="2"/><path d="M8 11V8a4 4 0 118 0v3" stroke-width="2"/></svg></span>
+        <input id="inPass" class="inp" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button class="endTxt" type="button" data-toggle="inPass">SHOW</button>
+      </div>
+      <button id="signInBtn" class="mainBtn" type="submit">Sign In</button>
+      <div class="alt">Don’t have an account? <a href="#" data-go="up">Create account</a></div>
+    </form>
+
+    <form id="signupForm" class="form active">
+      <div class="field">
+        <span class="i"><svg fill="none" viewBox="0 0 24 24"><path d="M20 21a8 8 0 00-16 0" stroke-width="2"/><circle cx="12" cy="8" r="4" stroke-width="2"/></svg></span>
+        <input id="upName" class="inp" type="text" placeholder="Full name" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <span class="i"><svg fill="none" viewBox="0 0 24 24"><path d="M4 7l8 6 8-6"/><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="2"/></svg></span>
+        <input id="upEmail" class="inp" type="email" placeholder="Email address" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <span class="i"><svg fill="none" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2" stroke-width="2"/><path d="M8 11V8a4 4 0 118 0v3" stroke-width="2"/></svg></span>
+        <input id="upPass" class="inp" type="password" placeholder="Create password (min 6)" autocomplete="new-password" minlength="6" required>
+        <button class="endTxt" type="button" data-toggle="upPass">SHOW</button>
+      </div>
+      <div class="field">
+        <span class="i"><svg fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke-width="2"/><path d="M9.5 12.5l1.7 1.7 3.6-4" stroke-width="2"/></svg></span>
+        <input id="invite" class="inp" type="text" placeholder="Invitation code (optional)" autocomplete="off">
+        <button id="verifyBtn" class="endBtn" type="button">VERIFY</button>
+      </div>
+      <div id="inviteMsg" class="note small">Enter a valid code to receive a welcome bonus</div>
+      <button id="signUpBtn" class="mainBtn" type="submit">Create Account</button>
+      <div class="alt">Already have an account? <a href="#" data-go="in">Sign in</a></div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import {getAnalytics,isSupported as analyticsSupported} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
+import {getAuth,setPersistence,browserLocalPersistence,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyBvzfJOOjRFZnTgTUrwEZQPr8Ba7zKKlNg",
+  authDomain:"hhhxh-5ebe4.firebaseapp.com",
+  projectId:"hhhxh-5ebe4",
+  storageBucket:"hhhxh-5ebe4.firebasestorage.app",
+  messagingSenderId:"79243000696",
+  appId:"1:79243000696:web:ee0fb2d2ccce791954e68d",
+  measurementId:"G-08BR6LN6PT"
+};
+
+const app=initializeApp(firebaseConfig);
+try{if(await analyticsSupported())getAnalytics(app)}catch(e){}
+const auth=getAuth(app),db=getFirestore(app);
+await setPersistence(auth,browserLocalPersistence);
+
+const $=s=>document.querySelector(s);
+const boot=$("#boot"),tabIn=$("#tabIn"),tabUp=$("#tabUp"),signinForm=$("#signinForm"),signupForm=$("#signupForm"),invite=$("#invite"),inviteMsg=$("#inviteMsg"),toastBox=$("#toast");
+let verifiedCode="";
+
+function toast(msg,type="err"){toastBox.textContent=msg;toastBox.className="toast show "+type;clearTimeout(toastBox.t);toastBox.t=setTimeout(()=>toastBox.className="toast",2600)}
+function busy(el,on,text){if(!el)return;el.disabled=on;if(text)el.dataset.txt??=el.textContent,el.textContent=on?text:el.dataset.txt}
+function go(which){
+  const up=which==="up";
+  tabUp.classList.toggle("active",up);tabIn.classList.toggle("active",!up);
+  signupForm.classList.toggle("active",up);signinForm.classList.toggle("active",!up);
+}
+function errMsg(e){
+  const c=e?.code||"";
+  if(c.includes("invalid-email"))return"البريد الإلكتروني غير صحيح";
+  if(c.includes("missing-password"))return"أدخل كلمة المرور";
+  if(c.includes("weak-password"))return"كلمة المرور يجب أن تكون 6 أحرف أو أكثر";
+  if(c.includes("email-already-in-use"))return"هذا البريد مستخدم بالفعل";
+  if(c.includes("invalid-credential")||c.includes("wrong-password")||c.includes("user-not-found"))return"بيانات الدخول غير صحيحة";
+  if(c.includes("too-many-requests"))return"محاولات كثيرة، حاول لاحقًا";
+  if(c.includes("network-request-failed"))return"مشكلة اتصال بالشبكة";
+  return"حدث خطأ، حاول مرة أخرى";
+}
+function resetInviteState(msg="Enter a valid code to receive a welcome bonus",cls="note small"){verifiedCode="";inviteMsg.className=cls;inviteMsg.textContent=msg}
+document.querySelectorAll("[data-go]").forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.go)});
+tabIn.onclick=()=>go("in");tabUp.onclick=()=>go("up");
+document.querySelectorAll("[data-toggle]").forEach(b=>b.onclick=()=>{const i=$("#"+b.dataset.toggle);const p=i.type==="password";i.type=p?"text":"password";b.textContent=p?"HIDE":"SHOW"});
+
+invite.addEventListener("input",()=>resetInviteState());
+
+$("#verifyBtn").onclick=async()=>{
+  const code=invite.value.trim();
+  if(!code)return toast("أدخل كود الدعوة أولاً");
+  busy($("#verifyBtn"),true,"VERIFY...");
+  try{
+    const snap=await getDoc(doc(db,"inviteCodes",code));
+    if(snap.exists()&&snap.data()?.active!==false){
+      verifiedCode=code;
+      inviteMsg.className="note small ok";
+      inviteMsg.textContent="Code verified successfully. Welcome bonus enabled.";
+      toast("تم التحقق من كود الدعوة","ok");
+    }else{
+      resetInviteState("Invalid invitation code","note small err");
+      toast("كود الدعوة غير صالح");
+    }
+  }catch(e){
+    resetInviteState("Verification failed","note small err");
+    toast("تعذر التحقق من الكود");
+  }
+  busy($("#verifyBtn"),false);
+};
+
+signinForm.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const btn=$("#signInBtn"),email=$("#inEmail").value.trim(),pass=$("#inPass").value;
+  if(!email||!pass)return toast("أكمل بيانات تسجيل الدخول");
+  busy(btn,true,"Please wait...");
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+    toast("تم تسجيل الدخول، جاري التحويل...","ok");
+    setTimeout(()=>location.replace("index.html"),500);
+  }catch(e){toast(errMsg(e))}
+  busy(btn,false);
+});
+
+signupForm.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const btn=$("#signUpBtn"),name=$("#upName").value.trim(),email=$("#upEmail").value.trim(),pass=$("#upPass").value,code=invite.value.trim();
+  if(!name||!email||!pass)return toast("أكمل كل الحقول المطلوبة");
+  if(pass.length<6)return toast("كلمة المرور يجب أن تكون 6 أحرف أو أكثر");
+  if(code&&code!==verifiedCode)return toast("اضغط VERIFY للتحقق من كود الدعوة أولاً");
+  busy(btn,true,"Creating...");
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pass);
+    await updateProfile(cred.user,{displayName:name});
+    await setDoc(doc(db,"users",cred.user.uid),{
+      uid:cred.user.uid,
+      fullName:name,
+      email,
+      inviteCode:verifiedCode||"",
+      bonusEligible:!!verifiedCode,
+      createdAt:serverTimestamp()
+    },{merge:true});
+    toast("تم إنشاء الحساب بنجاح","ok");
+    setTimeout(()=>location.replace("index.html"),500);
+  }catch(e){toast(errMsg(e))}
+  busy(btn,false);
+});
+
+onAuthStateChanged(auth,user=>{
+  if(user){location.replace("index.html");return}
+  boot.classList.add("hide");
+});
+</script>
+</body>
+</html>
