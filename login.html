@@ -1,463 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VIP Auth</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    :root {
-      --bg: #161714;
-      --panel: #181916;
-      --field: #8a6a2a;
-      --field-focus: #9d7830;
-      --gold: #efb34a;
-      --gold-2: #ffbf59;
-      --text: #f8f5ef;
-      --muted: #8e8a80;
-      --line: rgba(255,255,255,.12);
-      --dark-btn: #151613;
-      --white: #fff;
-    }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background:
-        radial-gradient(circle at top, rgba(255,191,89,.05), transparent 30%),
-        linear-gradient(180deg, #181916 0%, #141512 100%);
-      color: var(--text);
-      font-family: "Tahoma", "Arial", sans-serif;
-    }
-
-    body {
-      display: flex;
-      justify-content: center;
-    }
-
-    .screen {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      position: relative;
-      padding: 12px 18px 30px;
-      overflow: hidden;
-      background: transparent;
-    }
-
-    .top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .mini-btn, .lang-btn {
-      border: 1px solid rgba(255,255,255,.07);
-      background: #24231f;
-      color: var(--text);
-      border-radius: 12px;
-      min-height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mini-btn {
-      width: 40px;
-      font-size: 18px;
-    }
-
-    .lang-btn {
-      padding: 0 12px;
-      gap: 6px;
-      color: #f0d6a0;
-      font-size: 14px;
-    }
-
-    .logo-wrap {
-      width: 110px;
-      height: 110px;
-      margin: 8px auto 6px;
-      position: relative;
-    }
-
-    .diamond {
-      position: absolute;
-      transform: rotate(45deg);
-      background: #f7b800;
-    }
-
-    .a { width: 44px; height: 44px; top: 0; left: 33px; }
-    .b { width: 18px; height: 18px; top: 27px; left: 8px; }
-    .c { width: 18px; height: 18px; top: 27px; right: 8px; }
-    .d { width: 24px; height: 24px; top: 30px; left: 43px; }
-    .e { width: 44px; height: 44px; top: 44px; left: 33px; }
-
-    .hole {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      top: 36px;
-      left: 49px;
-      background: var(--bg);
-      transform: rotate(45deg);
-      z-index: 2;
-    }
-
-    .brand {
-      text-align: center;
-      color: var(--gold);
-      font-size: 28px;
-      letter-spacing: 1px;
-      margin-bottom: 22px;
-      font-weight: 500;
-    }
-
-    .mode-switch {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .switch-btn {
-      flex: 1;
-      background: none;
-      border: 0;
-      color: #74726c;
-      font-size: 17px;
-      font-weight: 700;
-      padding: 4px 0 12px;
-      border-bottom: 3px solid transparent;
-      cursor: pointer;
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    .switch-btn.active {
-      color: var(--white);
-      border-bottom-color: var(--white);
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .field-group label {
-      display: block;
-      color: #aaa59a;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .input-wrap {
-      height: 60px;
-      background: var(--field);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      padding: 0 14px;
-      gap: 10px;
-      transition: .2s ease;
-    }
-
-    .input-wrap:focus-within {
-      background: var(--field-focus);
-      box-shadow: 0 0 0 2px rgba(255,191,89,.12);
-    }
-
-    .input-icon, .toggle-eye {
-      width: 24px;
-      min-width: 24px;
-      text-align: center;
-      font-size: 20px;
-      color: #fff5dc;
-      opacity: .95;
-    }
-
-    .toggle-eye {
-      background: none;
-      border: 0;
-      cursor: pointer;
-      font-size: 18px;
-      padding: 0;
-    }
-
-    .prefix {
-      color: #fff3d6;
-      font-size: 16px;
-      white-space: nowrap;
-    }
-
-    .input-wrap input {
-      flex: 1;
-      height: 100%;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: #fff;
-      font-size: 16px;
-      direction: rtl;
-    }
-
-    .input-wrap input::placeholder {
-      color: #d6c49a;
-    }
-
-    .input-wrap.phone input {
-      direction: ltr;
-      text-align: right;
-    }
-
-    .submit-btn, .ghost-btn {
-      height: 58px;
-      width: 100%;
-      border-radius: 30px;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s ease;
-      margin-top: 2px;
-    }
-
-    .submit-btn {
-      background: linear-gradient(180deg, #ffc560 0%, #f0ae45 100%);
-      color: #fff;
-      border: 0;
-      box-shadow: 0 10px 20px rgba(240,174,69,.18);
-    }
-
-    .ghost-btn {
-      background: transparent;
-      color: #fff;
-      border: 2px solid rgba(255,255,255,.75);
-    }
-
-    .contact-bar {
-      position: fixed;
-      left: 0;
-      top: 72%;
-      transform: translateY(-50%);
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      background: #20211f;
-      color: #fff;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-      padding: 10px 6px;
-      font-size: 13px;
-      border: 1px solid rgba(255,255,255,.08);
-      z-index: 20;
-      user-select: none;
-    }
-
-    .contact-bar small {
-      display: block;
-      margin-top: 8px;
-      text-align: center;
-      font-size: 15px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 380px) {
-      .switch-btn {
-        font-size: 15px;
-      }
-      .brand {
-        font-size: 25px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#141511">
+<title>GLOBAL VIP</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:#141511;color:#fff;overflow-x:hidden}
+:root{--bg:#141511;--bg2:#181915;--gold:#f3b54b;--gold2:#ffc45d;--field:rgba(173,129,48,.24);--fieldb:rgba(255,202,105,.22);--txt:#f6f3ea;--muted:#cfc7b4;--muted2:#8f8a7d;--line:rgba(255,255,255,.13)}
+body:before,body:after{content:"";position:fixed;inset:0;pointer-events:none}
+body:before{background:
+radial-gradient(2px 2px at 8% 12%,#ffffffd0 98%,transparent 100%),
+radial-gradient(1.6px 1.6px at 18% 28%,#fff8 98%,transparent 100%),
+radial-gradient(2px 2px at 30% 8%,#fff9 98%,transparent 100%),
+radial-gradient(1.8px 1.8px at 40% 23%,#fff7 98%,transparent 100%),
+radial-gradient(2px 2px at 55% 14%,#fff9 98%,transparent 100%),
+radial-gradient(1.6px 1.6px at 68% 7%,#fff7 98%,transparent 100%),
+radial-gradient(2px 2px at 78% 19%,#fffb 98%,transparent 100%),
+radial-gradient(1.8px 1.8px at 89% 11%,#fff8 98%,transparent 100%),
+radial-gradient(2px 2px at 12% 46%,#fff8 98%,transparent 100%),
+radial-gradient(1.6px 1.6px at 26% 57%,#fff7 98%,transparent 100%),
+radial-gradient(2px 2px at 47% 49%,#fff9 98%,transparent 100%),
+radial-gradient(1.6px 1.6px at 63% 62%,#fff8 98%,transparent 100%),
+radial-gradient(2px 2px at 82% 44%,#fff9 98%,transparent 100%),
+radial-gradient(1.7px 1.7px at 91% 58%,#fff7 98%,transparent 100%),
+radial-gradient(2px 2px at 15% 83%,#fff8 98%,transparent 100%),
+radial-gradient(1.7px 1.7px at 36% 75%,#fffa 98%,transparent 100%),
+radial-gradient(2px 2px at 52% 88%,#fff8 98%,transparent 100%),
+radial-gradient(1.7px 1.7px at 71% 79%,#fff7 98%,transparent 100%),
+radial-gradient(2px 2px at 88% 86%,#fff9 98%,transparent 100%);
+opacity:.8}
+body:after{background:
+radial-gradient(circle at 50% -10%,rgba(255,198,92,.12),transparent 34%),
+linear-gradient(180deg,#171814 0%,#141511 100%)}
+.app{width:100%;max-width:430px;min-height:100vh;margin:auto;position:relative;padding:20px 18px 30px}
+.logo{width:110px;height:110px;margin:10px auto 12px;position:relative;filter:drop-shadow(0 8px 20px rgba(243,181,75,.15))}
+.dm{position:absolute;background:#f7b600;transform:rotate(45deg)}
+.dm.a{width:44px;height:44px;top:0;left:33px}.dm.b{width:18px;height:18px;top:27px;left:8px}.dm.c{width:18px;height:18px;top:27px;right:8px}.dm.d{width:24px;height:24px;top:30px;left:43px}.dm.e{width:44px;height:44px;top:44px;left:33px}.hole{position:absolute;width:12px;height:12px;top:36px;left:49px;background:var(--bg);transform:rotate(45deg);z-index:2}
+.brand{text-align:center;color:var(--gold);font-size:30px;font-weight:500;letter-spacing:1px;margin:0 0 20px}
+.stage{perspective:1800px}
+.card{position:relative;min-height:590px;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,.8,.22,1)}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:8px 2px}
+.back{transform:rotateY(180deg)}
+.tabs{display:flex;gap:16px;justify-content:space-between;align-items:flex-end;margin:6px 10px 28px}
+.tab{flex:1;background:none;border:0;color:#8e8a7d;padding:0 0 12px;font-size:16px;font-weight:700;line-height:1.5;border-bottom:3px solid transparent;cursor:pointer;transition:.25s;text-align:center}
+.tab.active{color:#fff;border-color:#fff}
+.form{display:flex;flex-direction:column;gap:18px}
+.g label{display:block;font-size:16px;line-height:1.2;color:var(--muted);margin:0 0 10px;padding:0 6px}
+.f{height:60px;border-radius:18px;background:linear-gradient(180deg,rgba(147,109,39,.34),rgba(120,89,31,.30));border:1px solid var(--fieldb);display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 24px rgba(0,0,0,.14);transition:.25s}
+.f:focus-within{border-color:rgba(255,205,111,.48);box-shadow:0 0 0 3px rgba(255,196,93,.08),inset 0 1px 0 rgba(255,255,255,.06)}
+.ic,.ey,.pre{color:#fff6df;display:flex;align-items:center;justify-content:center}
+.ic{width:24px;font-size:20px}.pre{font-size:16px;white-space:nowrap}.ey{background:none;border:0;cursor:pointer;font-size:18px;width:24px;padding:0}
+.f input{flex:1;height:100%;background:none;border:0;outline:0;color:#fff;font-size:16px;font-family:inherit}
+.f input::placeholder{color:#dccda8}
+.f.phone input{direction:ltr;text-align:right}
+.btn{height:58px;border-radius:32px;font-size:18px;font-weight:700;cursor:pointer;transition:.25s;font-family:inherit}
+.main{margin-top:4px;border:0;color:#fff;background:linear-gradient(180deg,var(--gold2),#ecad43);box-shadow:0 14px 26px rgba(240,174,69,.20)}
+.main:hover{filter:brightness(1.03)}
+.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.78)}
+.ghost:hover{background:rgba(255,255,255,.03)}
+.hide{display:none!important}
+.note{text-align:center;font-size:13px;color:#a9a290;margin-top:10px}
+@media (max-width:380px){.brand{font-size:27px}.tab,.g label,.f input,.pre{font-size:15px}}
+</style>
 </head>
 <body>
-  <aside class="contact-bar">
-    Contact us
-    <small>💬</small>
-  </aside>
+<div class="app">
+  <div class="logo"><i class="dm a"></i><i class="dm b"></i><i class="dm c"></i><i class="dm d"></i><i class="dm e"></i><i class="hole"></i></div>
+  <h1 class="brand">GLOBAL VIP</h1>
 
-  <div class="screen">
-    <div class="top-row">
-      <button class="mini-btn" type="button" aria-label="الدعم">🎧</button>
-      <button class="lang-btn" type="button" aria-label="اللغة">🌐 عربي</button>
+  <div class="stage">
+    <div class="card" id="card">
+
+      <section class="face front">
+        <div class="tabs">
+          <button class="tab" id="sEmail">التسجيل بالبريد الإلكتروني</button>
+          <button class="tab active" id="sPhone">التسجيل عبر الهاتف</button>
+        </div>
+
+        <form class="form" id="signupForm" novalidate>
+          <div class="g">
+            <label id="sIdLabel">رقم التليفون</label>
+            <div class="f phone" id="sIdWrap">
+              <span class="ic" id="sIdIcon">📞</span>
+              <span class="pre" id="sPrefix">+1</span>
+              <input id="sIdentity" type="tel" placeholder="رقم التليفون">
+            </div>
+          </div>
+
+          <div class="g">
+            <label>كلمة المرور</label>
+            <div class="f">
+              <span class="ic">🔒</span>
+              <input id="sPass" type="password" placeholder="كلمة المرور">
+              <button class="ey" type="button" data-eye="sPass">👁</button>
+            </div>
+          </div>
+
+          <div class="g">
+            <label>إعادة إدخال كلمة المرور</label>
+            <div class="f">
+              <span class="ic">🔒</span>
+              <input id="sPass2" type="password" placeholder="إعادة إدخال كلمة المرور">
+              <button class="ey" type="button" data-eye="sPass2">👁</button>
+            </div>
+          </div>
+
+          <div class="g">
+            <label>شفرة الدعوة</label>
+            <div class="f">
+              <span class="ic">👍</span>
+              <input id="invite" type="text" value="838083" readonly>
+            </div>
+          </div>
+
+          <button class="btn main" type="submit">اشترك</button>
+          <button class="btn ghost" type="button" id="goLogin">تسجيل الدخول</button>
+        </form>
+      </section>
+
+      <section class="face back">
+        <div class="tabs">
+          <button class="tab" id="lEmail">تسجيل الدخول بالبريد الإلكتروني</button>
+          <button class="tab active" id="lPhone">تسجيل الدخول عبر الهاتف</button>
+        </div>
+
+        <form class="form" id="loginForm" novalidate>
+          <div class="g">
+            <label id="lIdLabel">رقم التليفون</label>
+            <div class="f phone" id="lIdWrap">
+              <span class="ic" id="lIdIcon">📞</span>
+              <span class="pre" id="lPrefix">+1</span>
+              <input id="lIdentity" type="tel" placeholder="رقم التليفون">
+            </div>
+          </div>
+
+          <div class="g">
+            <label>كلمة المرور</label>
+            <div class="f">
+              <span class="ic">🔒</span>
+              <input id="lPass" type="password" placeholder="كلمة المرور">
+              <button class="ey" type="button" data-eye="lPass">👁</button>
+            </div>
+          </div>
+
+          <button class="btn main" type="submit">تسجيل الدخول</button>
+          <button class="btn ghost" type="button" id="goSignup">إنشاء حساب</button>
+        </form>
+      </section>
+
     </div>
-
-    <div class="logo-wrap" aria-hidden="true">
-      <div class="diamond a"></div>
-      <div class="diamond b"></div>
-      <div class="diamond c"></div>
-      <div class="diamond d"></div>
-      <div class="diamond e"></div>
-      <div class="hole"></div>
-    </div>
-
-    <div class="brand">VIP PLATFORM</div>
-
-    <div class="mode-switch">
-      <button id="tabEmail" class="switch-btn" type="button">التسجيل بالبريد الإلكتروني</button>
-      <button id="tabPhone" class="switch-btn active" type="button">التسجيل عبر الهاتف</button>
-    </div>
-
-    <form id="authForm" class="form" novalidate>
-      <div class="field-group">
-        <label id="idLabel">رقم التليفون</label>
-        <div id="idWrap" class="input-wrap phone">
-          <span id="idIcon" class="input-icon">📞</span>
-          <span id="phonePrefix" class="prefix">+1</span>
-          <input id="identityInput" type="tel" placeholder="رقم التليفون" />
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label>كلمة المرور</label>
-        <div class="input-wrap">
-          <span class="input-icon">🔒</span>
-          <input id="passwordInput" type="password" placeholder="كلمة المرور" />
-          <button class="toggle-eye" type="button" data-target="passwordInput">👁</button>
-        </div>
-      </div>
-
-      <div id="confirmGroup" class="field-group">
-        <label>إعادة إدخال كلمة المرور</label>
-        <div class="input-wrap">
-          <span class="input-icon">🔒</span>
-          <input id="confirmInput" type="password" placeholder="إعادة إدخال كلمة المرور" />
-          <button class="toggle-eye" type="button" data-target="confirmInput">👁</button>
-        </div>
-      </div>
-
-      <div id="inviteGroup" class="field-group">
-        <label>شفرة الدعوة</label>
-        <div class="input-wrap">
-          <span class="input-icon">👍</span>
-          <input id="inviteInput" type="text" value="838083" readonly />
-        </div>
-      </div>
-
-      <button id="primaryBtn" class="submit-btn" type="submit">اشترك</button>
-      <button id="secondaryBtn" class="ghost-btn" type="button">تسجيل الدخول</button>
-    </form>
   </div>
+</div>
 
-  <script>
-    const tabPhone = document.getElementById("tabPhone");
-    const tabEmail = document.getElementById("tabEmail");
-    const idLabel = document.getElementById("idLabel");
-    const idWrap = document.getElementById("idWrap");
-    const idIcon = document.getElementById("idIcon");
-    const phonePrefix = document.getElementById("phonePrefix");
-    const identityInput = document.getElementById("identityInput");
-    const confirmGroup = document.getElementById("confirmGroup");
-    const inviteGroup = document.getElementById("inviteGroup");
-    const primaryBtn = document.getElementById("primaryBtn");
-    const secondaryBtn = document.getElementById("secondaryBtn");
-    const authForm = document.getElementById("authForm");
-
-    let activeMethod = "phone"; // phone | email
-    let activeMode = "signup";  // signup | login
-
-    function render() {
-      const isPhone = activeMethod === "phone";
-      const isSignup = activeMode === "signup";
-
-      tabPhone.textContent = isSignup ? "التسجيل عبر الهاتف" : "تسجيل الدخول عبر الهاتف";
-      tabEmail.textContent = isSignup ? "التسجيل بالبريد الإلكتروني" : "تسجيل الدخول بالبريد الإلكتروني";
-
-      tabPhone.classList.toggle("active", isPhone);
-      tabEmail.classList.toggle("active", !isPhone);
-
-      if (isPhone) {
-        idLabel.textContent = "رقم التليفون";
-        idIcon.textContent = "📞";
-        phonePrefix.classList.remove("hidden");
-        idWrap.classList.add("phone");
-        identityInput.type = "tel";
-        identityInput.placeholder = "رقم التليفون";
-        identityInput.value = "";
-      } else {
-        idLabel.textContent = "بريد إلكتروني";
-        idIcon.textContent = "✉";
-        phonePrefix.classList.add("hidden");
-        idWrap.classList.remove("phone");
-        identityInput.type = "email";
-        identityInput.placeholder = "بريد إلكتروني";
-        identityInput.value = "";
-      }
-
-      confirmGroup.classList.toggle("hidden", !isSignup);
-      inviteGroup.classList.toggle("hidden", !isSignup);
-
-      primaryBtn.textContent = isSignup ? "اشترك" : "تسجيل الدخول";
-      secondaryBtn.textContent = isSignup ? "تسجيل الدخول" : "اشترك";
-    }
-
-    tabPhone.addEventListener("click", () => {
-      activeMethod = "phone";
-      render();
-    });
-
-    tabEmail.addEventListener("click", () => {
-      activeMethod = "email";
-      render();
-    });
-
-    secondaryBtn.addEventListener("click", () => {
-      activeMode = activeMode === "signup" ? "login" : "signup";
-      render();
-    });
-
-    document.querySelectorAll(".toggle-eye").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const input = document.getElementById(btn.dataset.target);
-        input.type = input.type === "password" ? "text" : "password";
-      });
-    });
-
-    authForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const identity = identityInput.value.trim();
-      const password = document.getElementById("passwordInput").value.trim();
-      const confirm = document.getElementById("confirmInput").value.trim();
-
-      if (!identity) {
-        alert(activeMethod === "phone" ? "من فضلك أدخل رقم التليفون" : "من فضلك أدخل البريد الإلكتروني");
-        return;
-      }
-
-      if (!password) {
-        alert("من فضلك أدخل كلمة المرور");
-        return;
-      }
-
-      if (activeMode === "signup") {
-        if (!confirm) {
-          alert("من فضلك أعد إدخال كلمة المرور");
-          return;
-        }
-
-        if (password !== confirm) {
-          alert("كلمتا المرور غير متطابقتين");
-          return;
-        }
-
-        alert("تم تجهيز نموذج إنشاء الحساب بنجاح");
-      } else {
-        alert("تم تجهيز نموذج تسجيل الدخول بنجاح");
-      }
-    });
-
-    render();
-  </script>
+<script>
+const $=e=>document.getElementById(e),card=$("card");
+let sMode="phone",lMode="phone";
+function setMode(p,m){
+ const isPhone=m==="phone",
+ lab=$(p+"IdLabel"),wrap=$(p+"IdWrap"),icon=$(p+"IdIcon"),pre=$(p+"Prefix"),inp=$(p+"Identity"),
+ t1=$(p+(p==="s"?"Phone":"Phone")),t2=$(p+(p==="s"?"Email":"Email"));
+ if(p==="s"){ $("sPhone").classList.toggle("active",isPhone); $("sEmail").classList.toggle("active",!isPhone); }
+ if(p==="l"){ $("lPhone").classList.toggle("active",isPhone); $("lEmail").classList.toggle("active",!isPhone); }
+ lab.textContent=isPhone?"رقم التليفون":"البريد الإلكتروني";
+ icon.textContent=isPhone?"📞":"✉";
+ pre.classList.toggle("hide",!isPhone);
+ wrap.classList.toggle("phone",isPhone);
+ inp.type=isPhone?"tel":"email";
+ inp.placeholder=isPhone?"رقم التليفون":"البريد الإلكتروني";
+ inp.value="";
+}
+$("sPhone").onclick=()=>{sMode="phone";setMode("s",sMode)};
+$("sEmail").onclick=()=>{sMode="email";setMode("s",sMode)};
+$("lPhone").onclick=()=>{lMode="phone";setMode("l",lMode)};
+$("lEmail").onclick=()=>{lMode="email";setMode("l",lMode)};
+$("goLogin").onclick=()=>card.classList.add("flip");
+$("goSignup").onclick=()=>card.classList.remove("flip");
+document.querySelectorAll("[data-eye]").forEach(b=>b.onclick=()=>{const i=$(b.dataset.eye);i.type=i.type==="password"?"text":"password"});
+$("signupForm").onsubmit=e=>{
+ e.preventDefault();
+ const id=$("sIdentity").value.trim(),p1=$("sPass").value.trim(),p2=$("sPass2").value.trim();
+ if(!id)return alert(sMode==="phone"?"من فضلك أدخل رقم التليفون":"من فضلك أدخل البريد الإلكتروني");
+ if(!p1)return alert("من فضلك أدخل كلمة المرور");
+ if(!p2)return alert("من فضلك أعد إدخال كلمة المرور");
+ if(p1!==p2)return alert("كلمتا المرور غير متطابقتين");
+ alert("تم تجهيز نموذج إنشاء الحساب بنجاح");
+};
+$("loginForm").onsubmit=e=>{
+ e.preventDefault();
+ const id=$("lIdentity").value.trim(),p=$("lPass").value.trim();
+ if(!id)return alert(lMode==="phone"?"من فضلك أدخل رقم التليفون":"من فضلك أدخل البريد الإلكتروني");
+ if(!p)return alert("من فضلك أدخل كلمة المرور");
+ alert("تم تجهيز نموذج تسجيل الدخول بنجاح");
+};
+setMode("s","phone");setMode("l","phone");
+</script>
 </body>
 </html>
