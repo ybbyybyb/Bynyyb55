@@ -1,62 +1,72 @@
 <!doctype html>
 <html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GLOBAL VIP</title><style>
 *{box-sizing:border-box;font-family:Tahoma,Arial,sans-serif}html,body{margin:0;background:#0a0613;color:#fff}button,input,select{font:inherit;outline:0;border:0}body{direction:rtl}
-:root{--bg:#0d0717;--c1:#171028;--c2:#120b20;--bd:#7b44ff66;--tx:#fff;--mut:#bbaee6;--pri:#7b3cff;--red:#ff4d6d;--ok:#2ad483;--warn:#ffbe59}
-.x{display:none!important}.w{max-width:1180px;margin:auto;padding:18px}.b{cursor:pointer;color:#fff;background:linear-gradient(180deg,#211237,#150d24);border:1px solid var(--bd);padding:10px 14px;border-radius:16px}.b.g{background:linear-gradient(180deg,#123323,#0d2419);border-color:#2ad48366}.b.r{background:linear-gradient(180deg,#371321,#250c15);border-color:#ff4d6d66}.b.y{background:linear-gradient(180deg,#3a2810,#261908);border-color:#ffbe5966}.b.s{padding:8px 10px;border-radius:12px;font-size:13px}
+:root{--bd:#7b44ff66;--mut:#bbaee6;--red:#ff4d6d}
+.x{display:none!important}.w{max-width:1180px;margin:auto;padding:18px}
+.b{cursor:pointer;color:#fff;background:linear-gradient(180deg,#211237,#150d24);border:1px solid var(--bd);padding:10px 14px;border-radius:16px}
+.b.g{background:linear-gradient(180deg,#123323,#0d2419);border-color:#2ad48366}.b.r{background:linear-gradient(180deg,#371321,#250c15);border-color:#ff4d6d66}.b.y{background:linear-gradient(180deg,#3a2810,#261908);border-color:#ffbe5966}.b.s{padding:8px 10px;border-radius:12px;font-size:13px}
 .i,.sel{width:100%;padding:12px 14px;border-radius:16px;background:#120b1d;border:1px solid #7240ff55;color:#fff}.f{display:grid;gap:10px}
-.auth{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at top,#381864 0,#150b25 45%,#09050f 100%)}.box{width:min(420px,100%);background:linear-gradient(180deg,#19112a,#120b1d);border:1px solid var(--bd);border-radius:26px;padding:18px;box-shadow:0 15px 40px #0008}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tb{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:16px;background:linear-gradient(180deg,#170f28,#120b1d);border:1px solid #7442ff55;cursor:pointer}.tb.on{background:linear-gradient(180deg,#6d2dff,#8349ff);border-color:#c2a3ff}.cnt{min-width:22px;height:22px;padding:0 6px;display:grid;place-items:center;border-radius:999px;background:var(--red);font-size:12px;font-weight:700}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.brand{font-size:34px;font-weight:900}.user{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.tag{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg,#201332,#160e25);border:1px solid #7a43ff55;font-size:13px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.req{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card,.panel{background:linear-gradient(180deg,var(--c1),var(--c2));border:1px solid var(--bd);border-radius:24px;padding:16px;box-shadow:inset 0 0 0 1px #ffffff08,0 8px 30px #0004}.n{font-size:34px;font-weight:900}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}.stc{min-height:118px;background:linear-gradient(180deg,#160f26,#110a1d);border:1px solid #7442ff55;border-radius:24px;padding:18px 20px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end}.stc .num{font-size:56px;font-weight:900;line-height:1}.stc .lab{margin-top:8px;font-size:22px}
-.search{width:100%;padding:16px 18px;border-radius:22px;background:linear-gradient(180deg,#160f26,#110a1d);border:1px solid #7442ff55;color:#fff}.list{display:grid;gap:10px}.row{background:linear-gradient(180deg,#160f24,#110a1d);border:1px solid #7240ff44;border-radius:20px;padding:14px}.r1{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}.tt{font-weight:900}.sub,.mut{color:var(--mut);font-size:13px}.meta{margin-top:10px;line-height:1.9;font-size:13px;word-break:break-word}.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.st{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid #ffffff1a}.pending{background:#38270f;color:#ffd27a;border-color:#ffcf7055}.success{background:#10281b;color:#87efb7;border-color:#3add9166}.rejected{background:#33111a;color:#ff9eb3;border-color:#ff5f8666}.empty{min-height:120px;border:1px dashed #8850ff77;border-radius:24px;display:grid;place-items:center;color:#d8ccff;background:#120b20}
-.addr{display:grid;gap:10px}.ai{display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:center;background:linear-gradient(180deg,#160f24,#110a1d);border:1px solid #7240ff44;border-radius:20px;padding:12px}.ico{width:52px;height:52px;border-radius:16px;background:#221337;border:1px solid #7b44ff44;display:grid;place-items:center}.ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media(max-width:900px){.g3,.req,.ag{grid-template-columns:1fr}.brand{font-size:26px}}@media(max-width:640px){.stats{grid-template-columns:1fr}.stc .num{font-size:42px}.stc .lab{font-size:18px}}
+.auth{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at top,#381864 0,#150b25 45%,#09050f 100%)}
+.box{width:min(420px,100%);background:linear-gradient(180deg,#19112a,#120b1d);border:1px solid var(--bd);border-radius:26px;padding:18px;box-shadow:0 15px 40px #0008}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tb{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:16px;background:linear-gradient(180deg,#170f28,#120b1d);border:1px solid #7442ff55;cursor:pointer;color:#fff}
+.tb.on{background:linear-gradient(180deg,#6d2dff,#8349ff);border-color:#c2a3ff}
+.cnt{min-width:22px;height:22px;padding:0 6px;display:grid;place-items:center;border-radius:999px;background:var(--red);font-size:12px;font-weight:700}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.brand{font-size:34px;font-weight:900}.user{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg,#201332,#160e25);border:1px solid #7a43ff55;font-size:13px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.req{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card,.panel{background:linear-gradient(180deg,#171028,#120b20);border:1px solid var(--bd);border-radius:24px;padding:16px;box-shadow:inset 0 0 0 1px #ffffff08,0 8px 30px #0004}
+.n{font-size:34px;font-weight:900}
+.search{width:100%;padding:16px 18px;border-radius:22px;background:linear-gradient(180deg,#160f26,#110a1d);border:1px solid #7442ff55;color:#fff;margin-bottom:12px}
+.list{display:grid;gap:10px}
+.row{background:linear-gradient(180deg,#160f24,#110a1d);border:1px solid #7240ff44;border-radius:20px;padding:14px}
+.r1{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}.tt{font-weight:900}.sub,.mut{color:var(--mut);font-size:13px}
+.meta{margin-top:10px;line-height:1.9;font-size:13px;word-break:break-word}.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.st{padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid #ffffff1a}
+.pending{background:#38270f;color:#ffd27a;border-color:#ffcf7055}.success{background:#10281b;color:#87efb7;border-color:#3add9166}.rejected{background:#33111a;color:#ff9eb3;border-color:#ff5f8666}
+.empty{min-height:120px;border:1px dashed #8850ff77;border-radius:24px;display:grid;place-items:center;color:#d8ccff;background:#120b20}
+.addr{display:grid;gap:10px}
+.ai{display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:center;background:linear-gradient(180deg,#160f24,#110a1d);border:1px solid #7240ff44;border-radius:20px;padding:12px}
+.ico{width:52px;height:52px;border-radius:16px;background:#221337;border:1px solid #7b44ff44;display:grid;place-items:center}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.adminBar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;padding:10px;background:linear-gradient(180deg,#171028,#120b20);border:1px solid var(--bd);border-radius:20px}
+.adminBar .tb{flex:1;justify-content:center;min-width:120px}
+@media(max-width:900px){.g3,.req,.ag{grid-template-columns:1fr}.brand{font-size:26px}}
 </style></head><body>
 
-<section id="auth" class="auth"><div class="box"><div style="font-size:28px;font-weight:900">GLOBAL VIP</div><div id="am" class="mut" style="margin:8px 0 14px">تسجيل الدخول</div><div class="tabs" style="margin-bottom:12px"><button class="tb on" id="loginTab" onclick="mode('login',this)">دخول</button><button class="tb" id="regTab" onclick="mode('register',this)">إنشاء حساب</button></div><div class="f"><input id="name" class="i x" placeholder="الاسم"><input id="email" class="i" placeholder="البريد الإلكتروني"><input id="pass" class="i" type="password" placeholder="كلمة المرور"><button class="b" style="background:linear-gradient(180deg,#7a38ff,#5f25db);border-color:#ae86ff" onclick="goAuth()">متابعة</button></div><div style="height:1px;background:#ffffff14;margin:14px 0"></div><div class="mut" style="font-size:12px;line-height:1.9">إذا دخلت بهذا الحساب فسيتم تعيينك أدمن كامل الصلاحيات:<br><b>12345a@gmail.com</b><br><b>123456</b></div></div></section>
+<section id="auth" class="auth"><div class="box"><div style="font-size:28px;font-weight:900">GLOBAL VIP</div><div id="am" class="mut" style="margin:8px 0 14px">تسجيل الدخول</div><div class="tabs" style="margin-bottom:12px"><button class="tb on" id="loginTab" onclick="mode('login',this)">دخول</button><button class="tb" id="regTab" onclick="mode('register',this)">إنشاء حساب</button></div><div class="f"><input id="name" class="i x" placeholder="الاسم"><input id="email" class="i" placeholder="البريد الإلكتروني"><input id="pass" class="i" type="password" placeholder="كلمة المرور"><button class="b" style="background:linear-gradient(180deg,#7a38ff,#5f25db);border-color:#ae86ff" onclick="goAuth()">متابعة</button></div><div style="height:1px;background:#ffffff14;margin:14px 0"></div><div class="mut" style="font-size:12px;line-height:1.9">حساب الأدمن:<br><b>12345a@gmail.com</b><br><b>123456</b></div></div></section>
 
 <main id="app" class="x"><div class="w">
-<div class="top"><div class="brand">GLOBAL VIP</div><div class="user"><span class="tag" id="who"></span><span class="tag" id="role"></span><button id="adminBtn" class="b y x" onclick="document.getElementById('adminWrap').scrollIntoView({behavior:'smooth'})">لوحة الأدمن</button><button class="b r" onclick="logout()">خروج</button></div></div>
+<div class="top"><div class="brand">GLOBAL VIP</div><div class="user"><span class="tag" id="who"></span><span class="tag" id="role"></span><button class="b r" onclick="logout()">خروج</button></div></div>
 
+<!-- شاشة المستخدم العادي -->
+<div id="userView">
 <div class="g3">
 <div class="card"><div>الرصيد الحالي</div><div id="bal" class="n">0.00</div></div>
 <div class="card"><div>إجمالي الإيداعات المقبولة</div><div id="dep" class="n">0.00</div></div>
 <div class="card"><div>الحالة</div><div id="banState" class="n" style="font-size:24px">نشط</div></div>
 </div>
-
 <div style="height:12px"></div>
-
 <div class="req">
 <div class="card"><div style="font-weight:900;margin-bottom:10px">طلب إيداع</div><div class="f"><input id="dAmount" class="i" type="number" min="1" step="0.01" placeholder="المبلغ"><select id="dNet" class="sel"></select><input id="dAddr" class="i" placeholder="عنوان الإيداع" readonly><input id="dNote" class="i" placeholder="ملاحظة اختيارية"><button class="b g" onclick="req('deposit')">إرسال طلب الإيداع</button></div></div>
 <div class="card"><div style="font-weight:900;margin-bottom:10px">طلب سحب</div><div class="f"><input id="wAmount" class="i" type="number" min="1" step="0.01" placeholder="المبلغ"><input id="wMethod" class="i" placeholder="العملة / الشبكة"><input id="wAddr" class="i" placeholder="عنوان السحب"><input id="wNote" class="i" placeholder="ملاحظة اختيارية"><button class="b y" onclick="req('withdraw')">إرسال طلب السحب</button></div></div>
 </div>
-
 <div style="height:12px"></div>
 <div class="card"><div style="font-weight:900;margin-bottom:10px">طلباتي</div><div id="mine" class="list"></div></div>
-
-<section id="adminWrap" class="x" style="margin-top:14px">
-<div class="panel">
-<div class="top" style="margin-bottom:8px"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div class="brand" style="font-size:26px">لوحة تحكم الإيداعات والسحوبات</div><div class="tag">مباشر</div></div>
-<div class="tabs">
-<button class="tb on" id="tAll" onclick="tab('all',this)"><span class="cnt" id="cAll">0</span><span>الكل</span></button>
-<button class="tb" id="tWit" onclick="tab('withdraw',this)"><span class="cnt" id="cWit">0</span><span>السحب</span></button>
-<button class="tb" id="tDep" onclick="tab('deposit',this)"><span class="cnt" id="cDep">0</span><span>الإيداع</span></button>
-<button class="tb" id="tAdr" onclick="tab('addresses',this)"><span class="cnt" id="cAdr">0</span><span>عناوين</span></button>
-<button class="tb" id="tUsr" onclick="tab('users',this)"><span class="cnt" id="cUsr">0</span><span>المستخدمين</span></button>
-</div></div>
-
-<div class="stats">
-<div class="stc"><div class="num" id="sDep">0</div><div class="lab">الإيداعات</div></div>
-<div class="stc"><div class="num" id="sAll">0</div><div class="lab">كل الطلبات</div></div>
-<div class="stc"><div class="num" id="sPend">0</div><div class="lab">قيد المعالجة</div></div>
-<div class="stc"><div class="num" id="sWit">0</div><div class="lab">السحوبات</div></div>
-<div class="stc"><div class="num" id="sRej">0</div><div class="lab">مرفوض</div></div>
-<div class="stc"><div class="num" id="sAcc">0</div><div class="lab">مقبول</div></div>
 </div>
 
+<!-- لوحة الأدمن: شريط علوي فقط + محتوى التبويب -->
+<section id="adminWrap" class="x">
+<div class="adminBar">
+<button class="tb on" id="tDep" onclick="tab('deposit',this)"><span class="cnt" id="cDep">0</span><span>طلبات إيداع</span></button>
+<button class="tb" id="tWit" onclick="tab('withdraw',this)"><span class="cnt" id="cWit">0</span><span>طلبات سحب</span></button>
+<button class="tb" id="tAdr" onclick="tab('addresses',this)"><span class="cnt" id="cAdr">0</span><span>عناوين الدفع</span></button>
+<button class="tb" id="tUsr" onclick="tab('users',this)"><span class="cnt" id="cUsr">0</span><span>المستخدمين</span></button>
+</div>
 <input id="q" class="search" placeholder="بحث سريع" oninput="renderAdmin()">
 <div id="adminContent"></div>
-</div>
 </section>
+
 </div></main>
 
 <script type="module">
@@ -64,8 +74,8 @@ import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-ap
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
 import{getFirestore,doc,getDoc,setDoc,updateDoc,collection,addDoc,onSnapshot,serverTimestamp,query,where,getDocs,deleteDoc}from'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
 
-const cfg={apiKey:'AIzaSyBvzfJOOjRFZnTgTUrwEZQPr8Ba7zKKlNg',authDomain:'hhhxh-5ebe4.firebaseapp.com',projectId:'hhhxh-5ebe4',storageBucket:'hhhxh-5ebe4.firebasestorage.app',messagingSenderId:'79243000696',appId:'1:79243000696:web:ee0fb2d2ccce791954e68d',measurementId:'G-08BR6LN6PT'},AE='12345a@gmail.com',AP='123456',TXCOLS=['tx','transactions','requests','deposits','withdraws','withdrawals'],ADDRCOL='deposit_addresses',app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app),$=e=>document.getElementById(e);
-let M='login',ME=null,UD={},US=[],TX=[],TXM={},ADDR=[],SRC={},isAdmin=0,adminTab='all',offMe=()=>{},offUs=()=>{},offAd=()=>{},offTx=[],seeded=0;
+const cfg={apiKey:'AIzaSyBvzfJOOjRFZnTgTUrwEZQPr8Ba7zKKlNg',authDomain:'hhhxh-5ebe4.firebaseapp.com',projectId:'hhhxh-5ebe4',storageBucket:'hhhxh-5ebe4.firebasestorage.app',messagingSenderId:'79243000696',appId:'1:79243000696:web:ee0fb2d2ccce791954e68d',measurementId:'G-08BR6LN6PT'},AE='12345a@gmail.com',AP='123456',TXCOLS=['tx','transactions','requests','deposits','withdraws','withdrawals'],ADDRCOL='binolla',app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app),$=e=>document.getElementById(e);
+let M='login',ME=null,UD={},US=[],TX=[],TXM={},ADDR=[],SRC={},isAdmin=0,adminTab='deposit',offMe=()=>{},offUs=()=>{},offAd=()=>{},offTx=[],seeded=0;
 const str=v=>(v??'').toString().trim(),num=(...a)=>{for(let v of a){let n=parseFloat(str(v).replace(/[^\d.-]/g,''));if(!isNaN(n))return n}return 0},money=n=>(+n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}),pad=n=>String(n).padStart(2,'0'),ts=v=>!v?0:typeof v=='number'?(v<1e12?v*1e3:v):typeof v=='string'?(Date.parse(v)||0):v instanceof Date?+v:v.toDate?+v.toDate():v.seconds?v.seconds*1e3+((v.nanoseconds||0)/1e6|0):0,dt=v=>{let d=new Date(ts(v)||Date.now());return`${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`},pick=(o,k,d='')=>{for(let x of k){let v=o?.[x];if(v!==undefined&&v!==null&&v!=='')return v}return d},typ=(o,s='')=>{let v=str(pick(o,['type','txType','requestType','kind','category'],s)).toLowerCase();return/dep|deposit|ايداع|إيداع/.test(v)?'deposit':/with|withdraw|سحب/.test(v)?'withdraw':''},stat=v=>{v=str(v).toLowerCase();return/success|accepted|approved|done|completed|paid|ok|مقبول|مكتمل|ناجح/.test(v)?'success':/reject|declin|cancel|fail|رفض|مرفوض/.test(v)?'rejected':'pending'},esc=s=>str(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),toast=t=>alert(t),uBal=u=>num(u.balance,u.bal),uDep=u=>num(u.deposit,u.totalDeposit,u.acceptedDeposits),eff=(t,s,a)=>s!='success'?{bal:0,dep:0}:t=='deposit'?{bal:+a,dep:+a}:{bal:-a,dep:0};
 
 window.mode=(m)=>{M=m;$('am').textContent=m=='login'?'تسجيل الدخول':'إنشاء حساب';$('name').classList.toggle('x',m=='login');$('loginTab').classList.toggle('on',m=='login');$('regTab').classList.toggle('on',m=='register')};
@@ -76,7 +86,7 @@ window.logout=()=>signOut(auth);
 
 async function fixRole(u){let r=doc(db,'users',u.uid),s=await getDoc(r);if(!s.exists())return mkUser(u,'','');let d=s.data()||{};if(u.email==AE&&d.role!='admin'){await updateDoc(r,{role:'admin'});d.role='admin'}return d}
 function show(v){$('auth').classList.toggle('x',v);$('app').classList.toggle('x',!v)}
-function paint(){ $('who').textContent=ME?.email||'';$('role').textContent=isAdmin?'admin':'user';$('bal').textContent=money(uBal(UD));$('dep').textContent=money(uDep(UD));$('banState').textContent=UD.banned?'محظور':'نشط';$('adminBtn').classList.toggle('x',!isAdmin);$('adminWrap').classList.toggle('x',!isAdmin)}
+function paint(){$('who').textContent=ME?.email||'';$('role').textContent=isAdmin?'admin':'user';$('bal').textContent=money(uBal(UD));$('dep').textContent=money(uDep(UD));$('banState').textContent=UD.banned?'محظور':'نشط';$('adminWrap').classList.toggle('x',!isAdmin);$('userView').classList.toggle('x',isAdmin)}
 
 function norm(s,src){let o=s.data(),type=typ(o,src);if(!type)return null;let c=pick(o,['createdAt','timestamp','date','time','created_at','ts','submittedAt','updatedAt']),t={k:src+'__'+s.id,id:s.id,src,ref:s.ref,uid:str(pick(o,['uid','userId','user_id','ownerId','clientId'])),email:str(pick(o,['email','userEmail','user_email','mail'])),type,amount:num(o.amount,o.value,o.sum,o.total,o.usdt,o.money,o.price),method:str(pick(o,['method','currency','network','coin','paymentMethod','chain','walletType'])),address:str(pick(o,['address','addr','wallet','walletAddress','to','destination','account'])),note:str(pick(o,['note','message','details','remark','memo'])),status:stat(pick(o,['status','state','approval','result'],'pending')),createdAt:c,sort:ts(c),raw:o};if(!t.uid&&ME&&t.email&&t.email==ME.email)t.uid=ME.uid;return t}
 function stopTx(){offTx.forEach(f=>f&&f());offTx=[];SRC={};TX=[];TXM={};renderMine();renderAdmin()}
@@ -84,17 +94,17 @@ function rebuild(){let a=Object.values(SRC).flat().filter(Boolean),m={};for(let 
 function startTx(){stopTx();TXCOLS.forEach(c=>offTx.push(onSnapshot(collection(db,c),s=>{SRC[c]=[];s.forEach(d=>{let x=norm(d,c);x&&SRC[c].push(x)});rebuild()},()=>{})))}
 async function seedAddr(){if(seeded)return;seeded=1;for(let x of[{id:'trc20',name:'USDT TRC20',icon:'💠',address:'ضع هنا عنوان TRC20',enabled:true},{id:'bep20',name:'USDT BEP20',icon:'🟡',address:'ضع هنا عنوان BEP20',enabled:true},{id:'erc20',name:'USDT ERC20',icon:'🔷',address:'ضع هنا عنوان ERC20',enabled:false}])await setDoc(doc(db,ADDRCOL,x.id),{...x,createdAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true})}
 function startAddr(){offAd&&offAd();offAd=onSnapshot(collection(db,ADDRCOL),s=>{ADDR=[];s.forEach(d=>ADDR.push({id:d.id,...d.data()}));if(!ADDR.length&&isAdmin)seedAddr();ADDR.sort((a,b)=>ts(b.updatedAt||b.createdAt)-ts(a.updatedAt||a.createdAt));fillNets();renderAdmin()})}
-function fillNets(){let a=ADDR.filter(x=>x.enabled!==false);$('dNet').innerHTML=a.length?a.map(x=>`<option value="${esc(x.id)}">${esc(x.name||'بدون اسم')}</option>`).join(''):'<option value="">لا توجد عناوين إيداع</option>';updDAddr()}
-window.updDAddr=()=>{let x=ADDR.find(v=>v.id==$('dNet').value)||ADDR.find(v=>v.enabled!==false);$('dAddr').value=x?x.address||'':''}
-$('dNet').addEventListener('change',updDAddr);
+function fillNets(){let a=ADDR.filter(x=>x.enabled!==false),s=$('dNet');if(!s)return;s.innerHTML=a.length?a.map(x=>`<option value="${esc(x.id)}">${esc(x.name||'بدون اسم')}</option>`).join(''):'<option value="">لا توجد عناوين إيداع</option>';updDAddr()}
+window.updDAddr=()=>{let s=$('dNet');if(!s)return;let x=ADDR.find(v=>v.id==s.value)||ADDR.find(v=>v.enabled!==false);$('dAddr').value=x?x.address||'':''}
+document.addEventListener('change',e=>{if(e.target&&e.target.id=='dNet')updDAddr()});
 
 function txCard(t,a=0){let st=t.status||'pending';return`<div class="row"><div class="r1"><div><div class="tt">${t.type=='deposit'?'إيداع':'سحب'} - ${money(t.amount)}</div><div class="sub">${esc(t.email||'')}</div></div><span class="st ${st}">${st=='pending'?'قيد المعالجة':st=='success'?'مقبول':'مرفوض'}</span></div><div class="meta">الطريقة: ${esc(t.method||'-')}<br>العنوان: ${esc(t.address||'-')}<br>التاريخ: ${dt(t.createdAt)}${t.note?`<br>ملاحظة: ${esc(t.note)}`:''}</div>${a?`<div class="acts"><button class="b s g" onclick="setStatus('${esc(t.k)}','success')">قبول</button><button class="b s r" onclick="setStatus('${esc(t.k)}','rejected')">رفض</button><button class="b s y" onclick="editTx('${esc(t.k)}')">تعديل</button></div>`:''}</div>`}
-function renderMine(){let a=!ME?[]:(isAdmin?TX:TX.filter(t=>t.uid==ME.uid||t.email==ME.email)).sort((a,b)=>b.sort-a.sort);$('mine').innerHTML=a.length?a.map(v=>txCard(v)).join(''):'<div class="empty">لا توجد طلبات</div>'}
-function filt(){let q=str($('q')?.value).toLowerCase(),all=TX.filter(t=>!q||JSON.stringify(t).toLowerCase().includes(q));return{all,dep:all.filter(t=>t.type=='deposit'),wit:all.filter(t=>t.type=='withdraw'),pend:all.filter(t=>t.status=='pending'),acc:all.filter(t=>t.status=='success'),rej:all.filter(t=>t.status=='rejected')}}
+function renderMine(){if(isAdmin){let m=$('mine');if(m)m.innerHTML='';return}let a=!ME?[]:TX.filter(t=>t.uid==ME.uid||t.email==ME.email).sort((a,b)=>b.sort-a.sort);let m=$('mine');if(m)m.innerHTML=a.length?a.map(v=>txCard(v)).join(''):'<div class="empty">لا توجد طلبات</div>'}
+function filt(){let q=str($('q')?.value).toLowerCase(),all=TX.filter(t=>!q||JSON.stringify(t).toLowerCase().includes(q));return{all,dep:all.filter(t=>t.type=='deposit'),wit:all.filter(t=>t.type=='withdraw')}}
 function renderUsers(){let q=str($('q').value).toLowerCase(),a=US.filter(u=>!q||JSON.stringify(u).toLowerCase().includes(q)).sort((a,b)=>ts(b.createdAt)-ts(a.createdAt));return a.length?`<div class="list">${a.map(u=>`<div class="row"><div class="r1"><div><div class="tt">${esc(u.email||'-')}</div><div class="sub">${esc(u.name||'')}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="st ${u.banned?'rejected':'success'}">${u.banned?'محظور':'نشط'}</span><span class="st pending">${esc(u.role||'user')}</span></div></div><div class="meta">الرصيد: ${money(uBal(u))}<br>الإيداع: ${money(uDep(u))}</div><div class="acts"><button class="b s y" onclick="editUser('${esc(u.id)}')">تعديل</button><button class="b s ${u.banned?'g':'r'}" onclick="ban('${esc(u.id)}',${u.banned?0:1})">${u.banned?'فك الحظر':'حظر'}</button></div></div>`).join('')}</div>`:'<div class="empty">لا يوجد مستخدمون</div>'}
-function renderAddr(){return`<div class="list"><div class="row"><div class="r1"><div><div class="tt">عناوين الإيداع</div><div class="sub">الاسم + العنوان + الأيقونة + تفعيل + حفظ داخل Firebase</div></div><button class="b g s" onclick="addAddr()">إضافة شبكة</button></div></div><div class="addr">${ADDR.length?ADDR.map(a=>`<div class="ai"><div class="ico"><input id="ico_${esc(a.id)}" class="i" value="${esc(a.icon||'💳')}" style="padding:7px;text-align:center;height:52px"></div><div class="ag"><input id="name_${esc(a.id)}" class="i" value="${esc(a.name||'')}" placeholder="اسم الشبكة"><input id="address_${esc(a.id)}" class="i" value="${esc(a.address||'')}" placeholder="العنوان"></div><div style="display:grid;gap:8px"><button class="b g s" onclick="saveAddr('${esc(a.id)}')">حفظ</button><button class="b y s" onclick="toggleAddr('${esc(a.id)}',${a.enabled===false?1:0})">${a.enabled===false?'تفعيل':'تعطيل'}</button><button class="b r s" onclick="delAddr('${esc(a.id)}')">حذف</button></div></div>`).join(''):'<div class="empty">لا توجد عناوين بعد</div>'}</div></div>`}
-window.renderAdmin=()=>{if(!isAdmin)return;let c=filt();$('cAll').textContent=c.all.length;$('cDep').textContent=c.dep.length;$('cWit').textContent=c.wit.length;$('cUsr').textContent=US.length;$('cAdr').textContent=ADDR.length;$('sDep').textContent=c.dep.length;$('sAll').textContent=c.all.length;$('sPend').textContent=c.pend.length;$('sWit').textContent=c.wit.length;$('sRej').textContent=c.rej.length;$('sAcc').textContent=c.acc.length;$('adminContent').innerHTML=adminTab=='users'?renderUsers():adminTab=='addresses'?renderAddr():(adminTab=='deposit'?c.dep:adminTab=='withdraw'?c.wit:c.all).length?`<div class="list">${(adminTab=='deposit'?c.dep:adminTab=='withdraw'?c.wit:c.all).map(t=>txCard(t,1)).join('')}</div>`:'<div class="empty">لا توجد طلبات مطابقة</div>'}
-window.tab=(t,b)=>{adminTab=t;document.querySelectorAll('.tabs .tb').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderAdmin()}
+function renderAddr(){return`<div class="list"><div class="row"><div class="r1"><div><div class="tt">عناوين الدفع (قاعدة binolla)</div><div class="sub">جميع العناوين المحفوظة - تعديل وحفظ مباشر</div></div><button class="b g s" onclick="addAddr()">إضافة عنوان</button></div></div><div class="addr">${ADDR.length?ADDR.map(a=>`<div class="ai"><div class="ico"><input id="ico_${esc(a.id)}" class="i" value="${esc(a.icon||'💳')}" style="padding:7px;text-align:center;height:52px"></div><div class="ag"><input id="name_${esc(a.id)}" class="i" value="${esc(a.name||'')}" placeholder="اسم الشبكة"><input id="address_${esc(a.id)}" class="i" value="${esc(a.address||'')}" placeholder="العنوان"></div><div style="display:grid;gap:8px"><button class="b g s" onclick="saveAddr('${esc(a.id)}')">حفظ</button><button class="b y s" onclick="toggleAddr('${esc(a.id)}',${a.enabled===false?1:0})">${a.enabled===false?'تفعيل':'تعطيل'}</button><button class="b r s" onclick="delAddr('${esc(a.id)}')">حذف</button></div></div>`).join(''):'<div class="empty">لا توجد عناوين بعد</div>'}</div></div>`}
+window.renderAdmin=()=>{if(!isAdmin)return;let c=filt();$('cDep').textContent=c.dep.length;$('cWit').textContent=c.wit.length;$('cUsr').textContent=US.length;$('cAdr').textContent=ADDR.length;let h='';if(adminTab=='users')h=renderUsers();else if(adminTab=='addresses')h=renderAddr();else{let a=adminTab=='deposit'?c.dep:c.wit;h=a.length?`<div class="list">${a.map(t=>txCard(t,1)).join('')}</div>`:'<div class="empty">لا توجد طلبات</div>'}$('adminContent').innerHTML=h}
+window.tab=(t,b)=>{adminTab=t;document.querySelectorAll('.adminBar .tb').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderAdmin()}
 
 window.req=async type=>{if(!ME)return;if(UD.banned)return toast('الحساب محظور');let amount=+(type=='deposit'?$('dAmount').value:$('wAmount').value);if(!(amount>0))return toast('أدخل المبلغ');let method='',address='',note='';if(type=='deposit'){let x=ADDR.find(v=>v.id==$('dNet').value)||ADDR.find(v=>v.enabled!==false);if(!x)return toast('لا توجد عناوين إيداع متاحة');method=str(x.name);address=str(x.address);note=str($('dNote').value)}else{method=str($('wMethod').value);address=str($('wAddr').value);note=str($('wNote').value);if(!method||!address)return toast('أكمل كل البيانات');if(amount>uBal(UD))return toast('الرصيد غير كاف')}await addDoc(collection(db,'tx'),{uid:ME.uid,userId:ME.uid,email:ME.email,userEmail:ME.email,type,requestType:type,amount,value:amount,method,currency:method,address,wallet:address,status:'pending',state:'pending',note,createdAt:serverTimestamp()});['dAmount','dNote','wAmount','wMethod','wAddr','wNote'].forEach(id=>$(id)&&($(id).value=''));updDAddr();toast('تم إرسال الطلب')}
 
