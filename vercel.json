@@ -14,7 +14,7 @@
     },
     {
       "source": "/pages/My/Index",
-      "destination": "/index.html"
+      "destination": "/my.html"
     }
   ]
 }
