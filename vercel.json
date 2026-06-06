@@ -3,6 +3,10 @@
     {
       "source": "/pages/market/index",
       "destination": "/market.html"
+    },
+    {
+      "source": "/pages/Asset/Index",
+      "destination": "/asset.html"
     }
   ]
 }
