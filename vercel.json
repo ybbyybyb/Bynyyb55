@@ -11,6 +11,10 @@
     {
       "source": "/h5",
       "destination": "/index.html"
+    },
+    {
+      "source": "/pages/My/Index",
+      "destination": "/index.html"
     }
   ]
 }
